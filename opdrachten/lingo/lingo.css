@@ -1,0 +1,14 @@
+* {
+    font-size:25px;
+}
+
+input {
+    width:300px;
+    margin: 10px 0;
+    text-align: center;
+}
+
+div {
+    width:300px;
+    margin: 0 auto;
+}
