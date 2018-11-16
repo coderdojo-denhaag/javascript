@@ -1,0 +1,37 @@
+@import url(https://fonts.googleapis.com/css?family=Press+Start+2P);
+body {
+  font-family: Arial;
+  font-size: 25px;
+}
+td {
+  width: 50px;
+  height: 40px;
+  background-color: #2F54C6;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 3px;
+  font-weight: bold;
+  color: #fff;
+}
+#getallen {
+  float: left;
+  width: 400px;
+}
+#functies {
+  float: left;
+}
+#uitkomst {
+  height: 40px;
+  font-family: 'Press Start 2P', cursive;
+  text-align: right;
+  width: 390px;
+}
+#som {
+  height: 40px;
+  border: 1px solid #ddd;
+  width: 390px;
+  text-align: right;
+  line-height: 30px;
+  padding: 4px;
+  font-family: 'Press Start 2P', cursive;
+}
