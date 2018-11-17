@@ -1,1 +1,1 @@
-Javascript Workshops
+Javascript Workshops.
