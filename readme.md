@@ -9,6 +9,7 @@ Er zijn verschillende niveau's van opdrachten.
 
 ### Middel
 - Lingo; maak een woordraadspel
+- Space Invaders; het klassieke spel van 40 jaar oud
 
 ### Moeilijk
 - FlappyBird; een kloon van het spel op basis van Phaser (https://phaser.io/)

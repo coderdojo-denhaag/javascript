@@ -1,5 +1,5 @@
 
-var game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser-example', { preload: preload, create: create, update: update, render: render });
+var game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser-invaders', { preload: preload, create: create, update: update });
 
 function preload() {
 
@@ -10,6 +10,11 @@ function preload() {
     game.load.spritesheet('kaboom', 'assets/explode.png', 128, 128);
     game.load.image('starfield', 'assets/starfield.png');
     game.load.image('background', 'assets/background2.png');
+    
+    game.load.audio('music', 'assets/music.mp3');
+    game.load.audio('bullet', 'assets/bullet.wav');
+    game.load.audio('explosion', 'assets/explosion.mp3');
+    game.load.audio('killed', 'assets/killed.wav');
 }
 
 var player;
@@ -28,6 +33,10 @@ var enemyBullet;
 var firingTimer = 0;
 var stateText;
 var livingEnemies = [];
+var explosionsound;
+var bulletsound;
+var killedsound;
+
 
 function create() {
 
@@ -96,8 +105,15 @@ function create() {
 
     //  And some controls to play the game with
     cursors = game.input.keyboard.createCursorKeys();
-    fireButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-    
+    fireButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);    
+   
+    // Music please!
+    music = game.add.audio('music');
+    music.play();
+
+    explosionsound = game.add.audio('explosion');
+    bulletsound = game.add.audio('bullet');
+    killedsound = game.add.audio('killed');
 }
 
 function createAliens () {
@@ -121,7 +137,7 @@ function createAliens () {
     var tween = game.add.tween(aliens).to( { x: 200 }, 2000, Phaser.Easing.Linear.None, true, 0, 1000, true);
 
     //  When the tween loops it calls descend
-    tween.onLoop.add(descend, this);
+    tween.onRepeat.add(descend, this);
 }
 
 function setupInvader (invader) {
@@ -135,7 +151,7 @@ function setupInvader (invader) {
 function descend() {
 
     aliens.y += 10;
-
+    
 }
 
 function update() {
@@ -175,15 +191,6 @@ function update() {
 
 }
 
-function render() {
-
-    // for (var i = 0; i < aliens.length; i++)
-    // {
-    //     game.debug.body(aliens.children[i]);
-    // }
-
-}
-
 function collisionHandler (bullet, alien) {
 
     //  When a bullet hits an alien we kill them both
@@ -198,6 +205,7 @@ function collisionHandler (bullet, alien) {
     var explosion = explosions.getFirstExists(false);
     explosion.reset(alien.body.x, alien.body.y);
     explosion.play('kaboom', 30, false, true);
+    explosionsound.play();
 
     if (aliens.countLiving() == 0)
     {
@@ -229,7 +237,8 @@ function enemyHitsPlayer (player,bullet) {
     var explosion = explosions.getFirstExists(false);
     explosion.reset(player.body.x, player.body.y);
     explosion.play('kaboom', 30, false, true);
-
+    killedsound.play();
+    
     // When the player dies
     if (lives.countLiving() < 1)
     {
@@ -285,19 +294,13 @@ function fireBullet () {
 
         if (bullet)
         {
+            bulletsound.play();
             //  And fire it
             bullet.reset(player.x, player.y + 8);
             bullet.body.velocity.y = -400;
             bulletTime = game.time.now + 200;
         }
     }
-
-}
-
-function resetBullet (bullet) {
-
-    //  Called if the bullet goes out of the screen
-    bullet.kill();
 
 }
 
