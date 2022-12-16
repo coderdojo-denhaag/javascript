@@ -89,7 +89,7 @@ function create ()
 
     this.physics.add.overlap(player, stars, collectStar, null, this);
 
-    scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+    scoreText = this.add.text(12, 12, 'score: 0', { fontSize: '22px', fill: '#aaffdd' });
 
     bombs = this.physics.add.group();
 

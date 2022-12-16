@@ -2,8 +2,8 @@
 var mainState = {
     preload: function() {
         // Load the bird sprite
-        game.load.image('bird', 'assets/bird.png');
-        game.load.image('pipe', 'assets/pipe.png');
+        game.load.image('bird', 'asset2/bird.png');
+        game.load.image('pipe', 'asset2/pipe.png');
     },
 
     create: function() {

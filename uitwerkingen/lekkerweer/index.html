@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- load MUI -->
+        <link href="//cdn.muicss.com/mui-0.10.3/css/mui.min.css"
+            rel="stylesheet" type="text/css" />
+    </head>
+    <body id="weerapp">
+        <div class="mui-container">
+            <form class="mui-panel" onsubmit="return false">
+                <h1>Hoe is het weer?</h1>
+                <div class="mui-textfield">
+                    <input type="text" placeholder="Plaatsnaam"
+                        v-model="plaats">
+                </div>
+                <button type="submit" @click="ophalen();"
+                    class="mui-btn mui-btn--primary mui-btn--raised"> Haal
+                    het weer op</button>
+            </form>
+            <div class="mui-panel" v-show="temperatuur!=null">
+                <div class="mui--text-center">
+                    <img :src="icoon" alt="" />
+                </div>
+                <div>
+                    In {{adres}} is het nu {{kleineLetters(beschrijving)}}.
+                    De temperatuur is {{getal(temperatuur)}} graden
+                    celsius.
+                    {{tekst}}
+                </div>
+            </div>
+        </div>
+        <script type="module" src="lekkerweer.js" />
+    </body>
+</html>
